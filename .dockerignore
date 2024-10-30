@@ -1,0 +1,57 @@
+# Archivos de configuración y sistema
+**/.classpath
+**/.dockerignore
+**/.env
+**/.git
+**/.gitignore
+**/.project
+**/.settings
+**/.toolstarget
+**/.vs
+**/.vscode
+
+# Archivos y carpetas específicas de Maven y Gradle
+**/target
+**/build
+**/.mvn
+**/mvnw*
+**/.gradle
+**/gradlew*
+**/*.iml
+
+# Node.js y dependencias de frontend
+**/node_modules
+**/npm-debug.log
+
+# Archivos de log y temporales
+**/*.log
+**/*.tmp
+
+# Docker y archivos de Kubernetes específicos
+**/Dockerfile*
+**/docker-compose*
+**/azds.yaml
+**/charts
+**/secrets.dev.yaml
+**/values.dev.yaml
+
+# Otros archivos específicos de CI/CD
+**/.github
+**/.gitlab-ci.yml
+**/.circleci
+**/jenkinsfile
+
+# Archivos específicos del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Documentación y archivos de licencia
+LICENSE
+README.md
+
+# Incluir archivos de git específicos para versionado
+!**/.gitignore
+!.git/HEAD
+!.git/config
+!.git/packed-refs
+!.git/refs/heads/**
