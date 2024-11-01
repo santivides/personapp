@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   mariadb:
     image: mariadb:11.0
@@ -29,6 +31,25 @@ services:
       - ./scripts/persona_dml_mongo.js:/docker-entrypoint-initdb.d/persona_dml_mongo.js:ro
     networks:
       - lab-network
+
+  springboot-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: springboot-app
+    depends_on:
+      - mariadb
+      - mongodb
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mariadb://mariadb:3306/persona_db
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: r00t123
+      SPRING_DATA_MONGODB_URI: mongodb://admin:admin@mongodb:27017/persona_db
+    ports:
+      - "3000:3000"
+    networks:
+      - lab-network
+    entrypoint: ["java", "-jar", "/app/app.jar", "-Dspring.profiles.active=docker"]
 
 networks:
   lab-network:
