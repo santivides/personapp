@@ -23,6 +23,9 @@ public class PersonaMapperMongo {
 	private EstudiosMapperMongo estudiosMapperMongo;
 
 	@Autowired
+	private PersonaMapperMongo personaMapperMongo;
+
+	@Autowired
 	private TelefonoMapperMongo telefonoMapperMongo;
 
 	public PersonaDocument fromDomainToAdapter(Person person) {
@@ -88,4 +91,5 @@ public class PersonaMapperMongo {
 				.map(telefono -> telefonoMapperMongo.fromAdapterToDomain(telefono)).collect(Collectors.toList())
 				: new ArrayList<Phone>();
 	}
+
 }

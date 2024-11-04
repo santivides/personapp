@@ -3,7 +3,6 @@ package co.edu.javeriana.as.personapp.mongo.document;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +14,9 @@ import lombok.NoArgsConstructor;
 public class TelefonoDocument {
 	@Id
 	private String id;
+	private String numero; // Agrega este campo para el número de teléfono
 	private String oper;
+
 	@DocumentReference(lazy = true)
-    private PersonaDocument primaryDuenio;
+	private PersonaDocument primaryDuenio;
 }

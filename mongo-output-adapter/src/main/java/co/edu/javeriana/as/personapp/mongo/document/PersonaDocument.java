@@ -28,4 +28,5 @@ public class PersonaDocument {
 	@DocumentReference(lazy = true, lookup = "{ 'primaryPersona' : ?#{#self._id} }")
 	@ReadOnlyProperty
 	private List<EstudiosDocument> estudios;
+
 }
