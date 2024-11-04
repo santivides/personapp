@@ -22,7 +22,7 @@ public class EstudiosMapperMaria {
 
 	public EstudiosEntity fromDomainToAdapter(Study study) {
 		EstudiosEntityPK estudioPK = new EstudiosEntityPK();
-		estudioPK.setCcPer(study.getPerson().getIdentification());
+		estudioPK.setCcPer(study.getPerson().getIdentification())	;
 		estudioPK.setIdProf(study.getProfession().getIdentification());
 		EstudiosEntity estudio = new EstudiosEntity();
 		estudio.setEstudiosPK(estudioPK);
