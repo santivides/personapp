@@ -5,64 +5,68 @@ import co.edu.javeriana.as.personapp.application.port.out.StudyOutputPort;
 import co.edu.javeriana.as.personapp.common.annotations.UseCase;
 import co.edu.javeriana.as.personapp.common.exceptions.NoExistException;
 import co.edu.javeriana.as.personapp.domain.Study;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.util.List;
 
+@Setter
 @Slf4j
 @UseCase
 public class StudyUseCase implements StudyInputPort {
 
-    private StudyOutputPort studyPersistence;
+    private StudyOutputPort studyPersintance;
 
-    public StudyUseCase(@Qualifier("studyOutputAdapterMaria") StudyOutputPort studyPersistence){
-        this.studyPersistence = studyPersistence;
-    }
-
-    public void setStudyPersistence(StudyOutputPort studyPersistence) {
-        this.studyPersistence = studyPersistence;
+    public StudyUseCase(@Qualifier("studyOutputAdapterMaria") StudyOutputPort studyPersintance) {
+        this.studyPersintance = studyPersintance;
     }
 
     @Override
-    public void setPersistence(StudyOutputPort studyPersistence) {
-
+    public void setPersistence(StudyOutputPort studyOutputPort) {
+        this.studyPersintance = studyOutputPort;
     }
 
-    public Study create(Study study){
-        log.debug("Into create on application domain");
-        return studyPersistence.save(study);
+    @Override
+    public Study create(Study study) {
+        log.debug("Into create on Application Domain");
+        return this.studyPersintance.save(study);
     }
 
-    public Study edit(Integer personId, Integer professionId, Study study) throws NoExistException {
-        Study oldStudy = studyPersistence.findById(personId, professionId);
-        if(oldStudy != null){
-            return studyPersistence.save(study);
-        }
-        throw new NoExistException("the study with the persion id " + personId
-                + " and the profession id "+ professionId + "does not exist into db, cannot be edited");
-    }
-
-    public Boolean drop(Integer personId, Integer professionId)throws NoExistException{
-        Study oldStudy = studyPersistence.findById(personId, professionId);
-        if(oldStudy != null){
-            return studyPersistence.delete(personId, professionId);
-        }
-        throw new NoExistException("the study with the persion id " + personId
-                + " and the profession id "+ professionId + "does not exist into db, cannot be edited, cannot be dropped");
-    }
-
-    public List<Study> findAll(){
-        log.info("Output: "+studyPersistence.getClass());
-        return  studyPersistence.find();
-    }
-
-    public Study findOne(Integer personId, Integer professionId) throws NoExistException {
-        Study study = studyPersistence.findById(personId, professionId);
-        if (study != null)
-            return study;
+    @Override
+    public Study edit(Integer identificationPerson, Integer identificationProfession, Study study)
+            throws NoExistException {
+        Study oldstudy = this.studyPersintance.findById(identificationPerson, identificationProfession);
+        if (oldstudy != null)
+            return this.studyPersintance.save(study);
         throw new NoExistException(
-                "The study with person id " + personId + " and profession id " + professionId
+                "The study with person id " + identificationPerson + " and profession id " + identificationProfession
+                        + " does not exists, cannot be edited");
+    }
+
+    @Override
+    public Boolean drop(Integer identificationPerson, Integer identificationProfession) throws NoExistException {
+        Study oldstudy = studyPersintance.findById(identificationPerson, identificationProfession);
+        if (oldstudy != null)
+            return studyPersintance.delete(identificationPerson, identificationProfession);
+        throw new NoExistException(
+                "The study with person id " + identificationPerson + " and profession id " + identificationProfession
+                        + " does not exist into db, cannot be dropped");
+    }
+
+    @Override
+    public List<Study> findAll() {
+        log.info("Output: " + studyPersintance.getClass());
+        return studyPersintance.find();
+    }
+
+    @Override
+    public Study findOne(Integer identificationPerson, Integer identificationProfession) throws NoExistException {
+        Study oldstudy = studyPersintance.findById(identificationPerson, identificationProfession);
+        if (oldstudy != null)
+            return oldstudy;
+        throw new NoExistException(
+                "The study with person id " + identificationPerson + " and profession id " + identificationProfession
                         + "does not exist into db, cannot be found");
     }
 
@@ -70,6 +74,4 @@ public class StudyUseCase implements StudyInputPort {
     public Integer count() {
         return findAll().size();
     }
-
-
 }
