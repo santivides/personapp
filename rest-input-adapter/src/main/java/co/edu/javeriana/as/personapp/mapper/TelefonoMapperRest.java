@@ -5,8 +5,6 @@ import co.edu.javeriana.as.personapp.domain.Phone;
 import co.edu.javeriana.as.personapp.domain.Profession;
 import co.edu.javeriana.as.personapp.domain.Study;
 import co.edu.javeriana.as.personapp.mariadb.entity.TelefonoEntity;
-import co.edu.javeriana.as.personapp.model.request.StudyRequest;
-import co.edu.javeriana.as.personapp.model.response.StudyResponse;
 import co.edu.javeriana.as.personapp.mongo.document.TelefonoDocument;
 import co.edu.javeriana.as.personapp.model.request.TelefonoRequest;
 import co.edu.javeriana.as.personapp.model.response.TelefonoResponse;
