@@ -49,7 +49,7 @@ services:
       - "3000:3000"
     networks:
       - lab-network
-    entrypoint: ["java", "-jar", "/app/app.jar", "-Dspring.profiles.active=docker"]
+    entrypoint: [ "java", "-jar", "/app/app.jar", "-Dspring.profiles.active=docker" ]
 
 networks:
   lab-network:
